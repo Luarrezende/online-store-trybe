@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsByQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsByQuery,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
 
 class Index extends React.Component {
   state = {
@@ -19,6 +23,15 @@ class Index extends React.Component {
   handleSearch = ({ target }) => {
     this.setState({
       inputSearch: target.value,
+    });
+  };
+
+  categorySelect = async ({ target }) => {
+    const { id, value } = target;
+    const products = await getProductsFromCategoryAndQuery(id, value);
+    const { results } = products;
+    this.setState({
+      productsList: results,
     });
   };
 
@@ -46,6 +59,7 @@ class Index extends React.Component {
               id={ id }
               name="name"
               value={ name }
+              onClick={ this.categorySelect }
             />
             <label htmlFor={ id }>{name}</label>
           </div>
