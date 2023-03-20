@@ -4,6 +4,7 @@ import {
   getCategories,
   getProductsByQuery,
   getProductsFromCategoryAndQuery,
+  getProductById,
 } from '../services/api';
 
 class Index extends React.Component {
@@ -24,6 +25,12 @@ class Index extends React.Component {
     this.setState({
       inputSearch: target.value,
     });
+  };
+
+  productInpectSelect = async ({ target }) => {
+    const { id } = target;
+    const products = await getProductById(id);
+    return products;
   };
 
   categorySelect = async ({ target }) => {
@@ -81,11 +88,18 @@ class Index extends React.Component {
 
           <ul>
             {productsList.map((product) => (
-              <li key={ product.id } data-testid="product">
-                <h4>{product.title}</h4>
-                <img src={ product.thumbnail } alt={ product.title } />
-                <p>{product.price}</p>
-
+              <li
+                key={ product.id }
+                data-testid="product"
+              >
+                <Link
+                  to={ `/product/${product.id}` }
+                  onClick={ this.productInpectSelect }
+                >
+                  <h4>{product.title}</h4>
+                  <img src={ product.thumbnail } alt={ product.title } />
+                  <p>{product.price}</p>
+                </Link>
               </li>
             ))}
           </ul>
