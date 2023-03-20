@@ -85,7 +85,7 @@ class Index extends React.Component {
                 <h4>{product.title}</h4>
                 <img src={ product.thumbnail } alt={ product.title } />
                 <p>{product.price}</p>
-
+                <button>Adicionar ao Carrinho</button>
               </li>
             ))}
           </ul>
