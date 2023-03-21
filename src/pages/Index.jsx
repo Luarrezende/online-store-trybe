@@ -138,7 +138,7 @@ class Index extends React.Component {
                 </Link>
               </li>
             ))}
-          </ul>
+          </ul>   
 
         )}
 
