@@ -6,7 +6,7 @@ export default class ShoppingCart extends Component {
     return (
       <section>
         {productsOnCart.length > 0 ? (
-          <div>productsOnCart</div>
+          { productsOnCart }
         ) : (
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio

@@ -11,8 +11,8 @@ class Index extends React.Component {
     get: [],
     inputSearch: '',
     productsList: [],
-    // productsToCart: [],
-    // productsOnCart: [],
+    productsToCart: [],
+    productsOnCart: [],
   };
 
   async componentDidMount() {
