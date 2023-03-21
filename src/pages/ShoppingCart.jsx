@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 
 export default class ShoppingCart extends Component {
   render() {
-    const { productsOnCart } = this.props;
+    // const { productsOnCart } = this.props;
     return (
-      <section>
-        {productsOnCart.length > 0 ? (
-          { productsOnCart }
-        ) : (
+      // <section>
+      //   {productsOnCart.length > 0 ? (
+      //     { productsOnCart }
+      //   ) : (
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
-        )}
-      </section>
+      //   )}
+      // </section>
     );
   }
 }
 
-ShoppingCart.propTypes = {
-  productsOnCart: PropTypes.arrayOf(Object),
-};
+// ShoppingCart.propTypes = {
+//   productsOnCart: PropTypes.arrayOf(Object),
+// };
 
-ShoppingCart.defaultProps = {
-  productsOnCart: [],
-};
+// ShoppingCart.defaultProps = {
+//   productsOnCart: [],
+// };

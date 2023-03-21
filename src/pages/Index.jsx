@@ -46,24 +46,24 @@ class Index extends React.Component {
     });
   };
 
-  cartProductsList = (product) => {
-    const { productsToCart } = this.state;
-    this.setState({
-      productsToCart: [...productsToCart, product],
-    });
-  };
+  // cartProductsList = (product) => {
+  //   const { productsToCart } = this.state;
+  //   this.setState({
+  //     productsToCart: [...productsToCart, product],
+  //   });
+  // };
 
-  saveToCart = ({ target }) => {
-    const { id } = target;
-    const { productsOnCart, productsToCart } = this.state;
-    const toCart = productsToCart.find((element) => element.id === id);
-    this.setState(
-      {
-        productsOnCart: [...productsOnCart, toCart],
-      },
-      this.cartProductsList(toCart),
-    );
-  };
+  // saveToCart = ({ target }) => {
+  //   const { id } = target;
+  //   const { productsOnCart, productsToCart } = this.state;
+  //   const toCart = productsToCart.find((element) => element.id === id);
+  //   this.setState(
+  //     {
+  //       productsOnCart: [...productsOnCart, toCart],
+  //     },
+  //     this.cartProductsList(toCart),
+  //   );
+  // };
 
   render() {
     const { get, inputSearch, productsList } = this.state;
@@ -107,9 +107,7 @@ class Index extends React.Component {
                 <img src={ product.thumbnail } alt={ product.title } />
                 <p>{product.price}</p>
 
-                <button
-                  onClick={ this.saveToCart }
-                >
+                <button>
                   Adicionar ao Carrinho
 
                 </button>
