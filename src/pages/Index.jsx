@@ -6,6 +6,7 @@ import {
   getProductsFromCategoryAndQuery,
   getProductById,
 } from '../services/api';
+import Product from '../components/Product';
 
 class Index extends React.Component {
   state = {
@@ -93,12 +94,16 @@ class Index extends React.Component {
                 data-testid="product"
               >
                 <Link
-                  to={ `/product/${product.id}` }
-                  onClick={ this.productInpectSelect }
+                  to={ `/products/${product.id}` }
+                  data-testid="product-detail-link"
                 >
-                  <h4>{product.title}</h4>
-                  <img src={ product.thumbnail } alt={ product.title } />
-                  <p>{product.price}</p>
+                  <Product
+                    onClick={ this.productInpectSelect }
+                    productName={ product.title }
+                    productImg={ product.thumbnail }
+                    productPrice={ product.price }
+                    productId={ product.id }
+                  />
                 </Link>
               </li>
             ))}
