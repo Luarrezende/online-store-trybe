@@ -11,6 +11,8 @@ class Index extends React.Component {
     get: [],
     inputSearch: '',
     productsList: [],
+    // productsToCart: [],
+    // productsOnCart: [],
   };
 
   async componentDidMount() {
@@ -42,6 +44,25 @@ class Index extends React.Component {
     this.setState({
       productsList: results,
     });
+  };
+
+  cartProductsList = (product) => {
+    const { productsToCart } = this.state;
+    this.setState({
+      productsToCart: [...productsToCart, product],
+    });
+  };
+
+  saveToCart = ({ target }) => {
+    const { id } = target;
+    const { productsOnCart, productsToCart } = this.state;
+    const toCart = productsToCart.find((element) => element.id === id);
+    this.setState(
+      {
+        productsOnCart: [...productsOnCart, toCart],
+      },
+      this.cartProductsList(toCart),
+    );
   };
 
   render() {
@@ -85,7 +106,14 @@ class Index extends React.Component {
                 <h4>{product.title}</h4>
                 <img src={ product.thumbnail } alt={ product.title } />
                 <p>{product.price}</p>
-                <button>Adicionar ao Carrinho</button>
+
+                <button
+                  onClick={ this.saveToCart }
+                >
+                  Adicionar ao Carrinho
+
+                </button>
+
               </li>
             ))}
           </ul>
