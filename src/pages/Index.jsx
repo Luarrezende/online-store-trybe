@@ -117,40 +117,30 @@ class Index extends React.Component {
         ) : (
           <ul>
             {productsList.map((product) => (
-              <>
-                <li key={ product.id } data-testid="product">
-                  <h4>{product.title}</h4>
-                  <img src={ product.thumbnail } alt={ product.title } />
-                  <p>{product.price}</p>
-
-                  <button
-                    type="button"
-                    data-testid="product-add-to-cart"
-                    onClick={ () => this.saveToCart(product) }
-                  >
-                    Adicionar ao carrinho
-                  </button>
-
-                </li>
-
-                <li
-                  key={ product.title }
-                  data-testid="product"
+              <li
+                key={ product.id }
+                data-testid="product"
+              >
+                <Link
+                  to={ `/products/${product.id}` }
+                  data-testid="product-detail-link"
                 >
-                  <Link
-                    to={ `/products/${product.id}` }
-                    data-testid="product-detail-link"
-                  >
-                    <Product
-                      onClick={ this.productInpectSelect }
-                      productName={ product.title }
-                      productImg={ product.thumbnail }
-                      productPrice={ product.price }
-                      productId={ product.id }
-                    />
-                  </Link>
-                </li>
-              </>
+                  <Product
+                    onClick={ this.productInpectSelect }
+                    productName={ product.title }
+                    productImg={ product.thumbnail }
+                    productPrice={ product.price }
+                    productId={ product.id }
+                  />
+                </Link>
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  onClick={ () => this.saveToCart(product) }
+                >
+                  Adicionar ao carrinho
+                </button>
+              </li>
             ))}
           </ul>
 
