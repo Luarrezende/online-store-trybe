@@ -13,8 +13,7 @@ class Index extends React.Component {
     get: [],
     inputSearch: '',
     productsList: [],
-    productsToCart: [],
-    productsOnCart: [],
+    productsToCart: JSON.parse(localStorage.getItem('cart')) || [],
   };
 
   async componentDidMount() {
@@ -54,6 +53,29 @@ class Index extends React.Component {
     });
   };
 
+  handleCartList = (product) => {
+    const { productsToCart } = this.state;
+    this.setState({
+      productsToCart: [...productsToCart, product],
+    });
+  };
+
+  saveToCart = (productId) => {
+    const { productsToCart } = this.state;
+    const toCart = productsToCart.find((item) => item.id === productId);
+    if (toCart) {
+      const updateProduct = productsToCart.forEach((itens) => itens.id === productId)
+        && productsToCart.push(itens);
+      localStorage.setItem('cart', JSON.stringify(productsToCart));
+      this.setState({
+        productsToCart: updateProduct,
+      });
+    } else {
+      localStorage.setItem('cart', JSON.stringify([...productsToCart, productId]));
+      this.handleCartList(productId);
+    }
+  };
+
   render() {
     const { get, inputSearch, productsList } = this.state;
     return (
@@ -88,44 +110,46 @@ class Index extends React.Component {
         {productsList.length === 0 ? (
           <p>Nenhum produto foi encontrado</p>
         ) : (
-
           <ul>
             {productsList.map((product) => (
-              <li key={ product.id } data-testid="product">
-                <h4>{product.title}</h4>
-                <img src={ product.thumbnail } alt={ product.title } />
-                <p>{product.price}</p>
+              <>
+                <li key={ product.id } data-testid="product">
+                  <h4>{product.title}</h4>
+                  <img src={ product.thumbnail } alt={ product.title } />
+                  <p>{product.price}</p>
 
-                <Link data-testid="shopping-cart-button" to="/shoppingcart">
-          <button
-            type="button"
-          >
-            Adicionar oo carrinho
-          </button>
-        </Link>
+                  <button
+                    type="button"
+                    data-testid="product-add-to-cart"
+                    onClick={ () => this.saveToCart(product) }
+                  >
+                    Adicionar ao carrinho
+                  </button>
 
-              <li
-                key={ product.id }
-                data-testid="product"
-              >
-                <Link
-                  to={ `/products/${product.id}` }
-                  data-testid="product-detail-link"
+                </li>
+
+                <li
+                  key={ product.id }
+                  data-testid="product"
                 >
-                  <Product
-                    onClick={ this.productInpectSelect }
-                    productName={ product.title }
-                    productImg={ product.thumbnail }
-                    productPrice={ product.price }
-                    productId={ product.id }
-                  />
-                </Link>
-              </li>
+                  <Link
+                    to={ `/products/${product.id}` }
+                    data-testid="product-detail-link"
+                  >
+                    <Product
+                      onClick={ this.productInpectSelect }
+                      productName={ product.title }
+                      productImg={ product.thumbnail }
+                      productPrice={ product.price }
+                      productId={ product.id }
+                    />
+                  </Link>
+                </li>
+              </>
             ))}
-          </ul>   
+          </ul>
 
         )}
-
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
