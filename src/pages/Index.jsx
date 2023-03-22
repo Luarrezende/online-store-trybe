@@ -54,25 +54,6 @@ class Index extends React.Component {
     });
   };
 
-  // cartProductsList = (product) => {
-  //   const { productsToCart } = this.state;
-  //   this.setState({
-  //     productsToCart: [...productsToCart, product],
-  //   });
-  // };
-
-  // saveToCart = ({ target }) => {
-  //   const { id } = target;
-  //   const { productsOnCart, productsToCart } = this.state;
-  //   const toCart = productsToCart.find((element) => element.id === id);
-  //   this.setState(
-  //     {
-  //       productsOnCart: [...productsOnCart, toCart],
-  //     },
-  //     this.cartProductsList(toCart),
-  //   );
-  // };
-
   render() {
     const { get, inputSearch, productsList } = this.state;
     return (
@@ -115,10 +96,13 @@ class Index extends React.Component {
                 <img src={ product.thumbnail } alt={ product.title } />
                 <p>{product.price}</p>
 
-                <button>
-                  Adicionar ao Carrinho
-
-                </button>
+                <Link data-testid="shopping-cart-button" to="/shoppingcart">
+          <button
+            type="button"
+          >
+            Adicionar oo carrinho
+          </button>
+        </Link>
 
               <li
                 key={ product.id }
