@@ -21,7 +21,7 @@ export default class ShoppingCart extends Component {
               <p
                 data-testid="shopping-cart-product-quantity"
               >
-                {`${item.order_backend}`}
+                {`${item.quantity}`}
 
               </p>
             </li>

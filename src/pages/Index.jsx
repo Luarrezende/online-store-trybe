@@ -62,15 +62,20 @@ class Index extends React.Component {
 
   saveToCart = (productId) => {
     const { productsToCart } = this.state;
-    const toCart = productsToCart.find((item) => item.id === productId);
+    const toCart = productsToCart.find((item) => item.id === productId.id);
+
     if (toCart) {
-      const updateProduct = productsToCart.forEach((itens) => itens.id === productId)
-        && productsToCart.push(itens);
-      localStorage.setItem('cart', JSON.stringify(productsToCart));
+      const updateProduct = productsToCart.filter((itens) => itens.id !== productId.id);
+      productId.quantity += 1;
+      console.log(productId.quantity);
+      const productQuantity = [...updateProduct, productId];
+      localStorage.setItem('cart', JSON.stringify(productQuantity));
       this.setState({
-        productsToCart: updateProduct,
+        productsToCart: productQuantity,
       });
     } else {
+      console.log('else');
+      productId.quantity = 1;
       localStorage.setItem('cart', JSON.stringify([...productsToCart, productId]));
       this.handleCartList(productId);
     }
@@ -129,7 +134,7 @@ class Index extends React.Component {
                 </li>
 
                 <li
-                  key={ product.id }
+                  key={ product.title }
                   data-testid="product"
                 >
                   <Link
